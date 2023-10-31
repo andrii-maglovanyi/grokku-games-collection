@@ -4,11 +4,13 @@ module.exports = {
       preset: "lighthouse:recommended",
     },
     collect: {
-      staticDistDir: ".next",
+      startServerCommand: "npm run start",
+      startServerReadyPattern: "ready on",
+      url: ["http://localhost:3000"],
     },
     upload: {
-      target: "lhci",
-      url: "https://andrii-maglovanyi.github.io/grokku-games-collection/",
+      target: "filesystem",
+      outputDir: "./lhci-reports",
     },
   },
 };
