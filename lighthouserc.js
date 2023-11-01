@@ -9,8 +9,7 @@ module.exports = {
       url: ["http://localhost:3000"],
     },
     upload: {
-      target: "filesystem",
-      outputDir: "./lhci-reports",
+      target: "temporary-public-storage",
     },
   },
 };
