@@ -35,17 +35,17 @@ jobs:
       - name: Build & analyze
         run: mkdir -p .next/analyze/main && node scripts/analyze-bundles.js | tee .next/analyze/output.txt
 
-      - name: Download main JSON
-        uses: dawidd6/action-download-artifact@v2
-        if: success() && github.event.number
-        with:
-          workflow: bundle_analysis.yml
-          branch: main
-          path: .next/analyze/main
+      # - name: Download main JSON
+      #   uses: dawidd6/action-download-artifact@v2
+      #   if: success() && github.event.number
+      #   with:
+      #     workflow: bundle_analysis.yml
+      #     branch: main
+      #     path: .next/analyze/main
 
-      - name: Compare bundle size
-        if: success() && github.event.number
-        run: ls -laR .next/analyze/main && node scripts/compare-bundles.js
+      # - name: Compare bundle size
+      #   if: success() && github.event.number
+      #   run: ls -laR .next/analyze/main && node scripts/compare-bundles.js
 
       - name: Upload bundle
         uses: actions/upload-artifact@v3
@@ -60,7 +60,7 @@ jobs:
         id: get-comment-body
         if: success() && github.event.number
         run: |
-          body=$(cat .next/analyze/bundle-comparison.txt)
+          body=$(cat .next/analyze/bundle-sizes.txt)
           body="${body//'%'/'%25'}"
           body="${body//$'\n'/'%0A'}"
           body="${body//$'\r'/'%0D'}"
