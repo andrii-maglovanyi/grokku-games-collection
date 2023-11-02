@@ -1,5 +1,11 @@
-name: CI
-on: [push]
+name: "Lighthouse Analysis"
+
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+
 jobs:
   lighthouseci:
     runs-on: ubuntu-latest
