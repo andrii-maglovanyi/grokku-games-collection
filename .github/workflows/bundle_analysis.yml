@@ -15,7 +15,7 @@ jobs:
         with:
           node-version: 20
       - run: npm install
-      - run: npm run build
+      - run: npm run build:analyze
       - name: Analyze bundle sizes
         uses: transferwise/actions-next-bundle-analyzer@master
         with:
