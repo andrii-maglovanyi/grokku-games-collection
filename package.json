@@ -5,7 +5,7 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "build:analyze": "cross-env ANALYZE=true next build && node scripts/analyze-bundles.js",
+    "build:analyze": "cross-env ANALYZE=true next build",
     "start": "next start",
     "lint": "next lint",
     "cypress:open": "cypress open"
