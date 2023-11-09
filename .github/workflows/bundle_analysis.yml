@@ -1,0 +1,44 @@
+name: Analyze Bundle Size
+
+# Run this workflow on every Pull Request action as well as all pushes to main
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  # This workflow contains a single job called "analyze"
+  analyze:
+    # The type of runner that the job will run on
+    runs-on: ubuntu-latest
+
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - uses: actions/checkout@v3
+
+      # Next.js runs on Node — we need to set this up first.
+      - name: Setup Node
+        uses: actions/setup-node@v3
+        with:
+          node-version: 20
+
+      # Run `npm install`, using a cache;
+      - name: Install
+        uses: bahmutov/npm-install@v1
+
+      - name: Build
+        run: npm run build
+
+      - name: Analyze bundle
+        uses: andrii-maglovanyi/nextjs-bundle-analyzer@v1.0.23
+        with:
+          workflow-id: bundle_analysis.yml
+          default-branch: main
+          prefix: .next
+          github-token: ${{ secrets.CREATE_OR_UPDATE_COMMENT }}
